@@ -1,3 +1,9 @@
+import {
+  SAVE_THE_VALUE,
+  ADD_TO_FAVOURITES,
+  REMOVE_FROM_FAVOURITES,
+} from "../actions";
+
 const initialState = {
   jobs: {
     content: [], // we're going to put our books here!
@@ -6,7 +12,7 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_FAVOURITES":
+    case ADD_TO_FAVOURITES:
       return {
         ...state,
         jobs: {
@@ -14,7 +20,21 @@ const mainReducer = (state = initialState, action) => {
           content: [...state.jobs.content, action.payload],
         },
       };
-
+    case REMOVE_FROM_FAVOURITES:
+      return {
+        ...state,
+        jobs: {
+          ...state.jobs,
+          content: state.jobs.content.filter((job, i) => {
+            return i !== action.payload;
+          }),
+        },
+      };
+    case SAVE_THE_VALUE:
+      return {
+        ...state,
+        value: action.payload,
+      };
     default:
       return state;
   }

@@ -3,8 +3,9 @@ import { Col, Row, Button, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { removeFromFavouriteAction } from "../Redux/actions/index";
 
-const FavouritesPage = () => {
+export default function FavouritesPage() {
   const jobs = useSelector((state) => state.jobs.content);
   // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
@@ -19,9 +20,17 @@ const FavouritesPage = () => {
               <li key={i} className="my-4">
                 <Link to={`/${job.company_name}`}>{job.data.company_name}</Link>
                 <p>{job.title}</p>
+                <Button
+                  variant="danger"
+                  onClick={() => {
+                    dispatch(removeFromFavouriteAction(i));
+                  }}
+                >
+                  Delete
+                </Button>
               </li>
             ))}
-            <Button variant="info" onClick={() => navigate(1)}>
+            <Button variant="info" onClick={() => navigate(-1)}>
               Back
             </Button>
           </ul>
@@ -29,6 +38,4 @@ const FavouritesPage = () => {
       </Row>
     </Container>
   );
-};
-
-export default FavouritesPage;
+}

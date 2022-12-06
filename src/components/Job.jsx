@@ -1,6 +1,6 @@
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { addToFavouriteAction } from "../Redux/actions/index";
 import { useDispatch } from "react-redux";
 
 const Job = ({ data }) => {
@@ -15,10 +15,7 @@ const Job = ({ data }) => {
         <Button
           variant="success"
           onClick={() => {
-            dispatch({
-              type: "ADD_TO_FAVOURITES",
-              payload: { data },
-            });
+            dispatch(addToFavouriteAction(data));
           }}
           className="ml-3"
         >
