@@ -14,13 +14,13 @@ const Job = ({ data }) => {
         <Link to={`/${data.company_name}`}>{data.company_name}</Link>
         <Button
           variant="success"
-          onClick={() => {
+          onClick={() =>
             //  dispatch({
             //    type: "ADD_TO_FAVOURITES",
             //    payload: { data },
             //  });
-            dispatch(addToFavouriteAction(data));
-          }}
+            dispatch(addToFavouriteAction(data))
+          }
           className="ml-3"
         >
           Add
