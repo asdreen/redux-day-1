@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { removeFromFavouriteAction } from "../Redux/actions/index";
 
 export default function FavouritesPage() {
-  const jobs = useSelector((state) => state.jobs.content);
+  const jobs = useSelector((state) => state.favoritejob.content);
   // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
   const navigate = useNavigate();

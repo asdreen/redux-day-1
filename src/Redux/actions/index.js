@@ -3,10 +3,10 @@ export const REMOVE_FROM_FAVOURITES = "REMOVE_FROM_FAVOURITES";
 export const GET_A_JOB = "GET_A_JOB";
 export const SAVE_THE_VALUE = "SAVE_THE_VALUE";
 
-export const addToFavouriteAction = (jobs) => {
+export const addToFavouriteAction = (data) => {
   return {
     type: ADD_TO_FAVOURITES,
-    payload: jobs,
+    payload: data,
   };
 };
 export const removeFromFavouriteAction = (i) => {

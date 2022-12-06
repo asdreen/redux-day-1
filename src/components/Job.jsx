@@ -15,6 +15,10 @@ const Job = ({ data }) => {
         <Button
           variant="success"
           onClick={() => {
+            //  dispatch({
+            //    type: "ADD_TO_FAVOURITES",
+            //    payload: { data },
+            //  });
             dispatch(addToFavouriteAction(data));
           }}
           className="ml-3"

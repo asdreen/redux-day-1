@@ -5,9 +5,7 @@ import {
 } from "../actions";
 
 const initialState = {
-  jobs: {
-    content: [], // we're going to put our books here!
-  },
+  content: [], // we're going to put our books here!
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -15,20 +13,16 @@ const mainReducer = (state = initialState, action) => {
     case ADD_TO_FAVOURITES:
       return {
         ...state,
-        jobs: {
-          ...state.jobs,
-          content: [...state.jobs.content, action.payload],
-        },
+
+        content: [...state.jobs.content, action.payload],
       };
     case REMOVE_FROM_FAVOURITES:
       return {
         ...state,
-        jobs: {
-          ...state.jobs,
-          content: state.jobs.content.filter((job, i) => {
-            return i !== action.payload;
-          }),
-        },
+
+        content: state.jobs.content.filter((job, i) => {
+          return i !== action.payload;
+        }),
       };
     case SAVE_THE_VALUE:
       return {

@@ -5,7 +5,7 @@ import mainReducer from "../reducers/index";
 
 const bigReducer = combineReducers({
   jobs: jobReducer,
-
+  favoritejob: mainReducer,
   value: mainReducer,
 });
 const store = configureStore({
