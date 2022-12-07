@@ -2,6 +2,8 @@ export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
 export const REMOVE_FROM_FAVOURITES = "REMOVE_FROM_FAVOURITES";
 export const GET_A_JOB = "GET_A_JOB";
 export const SAVE_THE_VALUE = "SAVE_THE_VALUE";
+export const GET_JOBS_LOADING = "GET_JOBS_LOADING";
+export const GET_JOBS_ERROR = "GET_JOBS_ERROR";
 
 export const addToFavouriteAction = (data) => {
   return {
@@ -28,18 +30,38 @@ export const getJobAction = (endPoint) => {
 
   return async (dispatch, getState) => {
     try {
-      let response = await fetch(baseEndpoint + endPoint);
+      dispatch({
+        type: GET_JOBS_LOADING,
+        payload: true,
+      });
+      const response = await fetch(baseEndpoint + endPoint + "&limit=20");
       if (response.ok) {
-        let { data } = await response.json();
+        const { data } = await response.json();
+        dispatch({
+          type: GET_JOBS_ERROR,
+          payload: false,
+        });
         dispatch({
           type: GET_A_JOB,
           payload: data,
         });
+        dispatch({
+          type: GET_JOBS_LOADING,
+          payload: false,
+        });
       } else {
-        console.log("Error fetching");
+        dispatch({
+          type: GET_JOBS_ERROR,
+          payload: true,
+        });
+        alert("Error fetching results");
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      dispatch({
+        type: GET_JOBS_ERROR,
+        payload: true,
+      });
+      console.log(error);
     }
   };
 };

@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Alert, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobAction, saveSearchInput } from "../Redux/actions/index";
@@ -8,6 +8,8 @@ const MainSearch = () => {
   const query = useSelector((state) => state.value.value);
   const jobs = useSelector((state) => state.jobs.jobs);
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.jobs.isLoading);
+  const isError = useSelector((state) => state.jobs.isError);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -43,6 +45,17 @@ const MainSearch = () => {
             <Job key={jobData._id} data={jobData} />
           ))}
         </Col>
+        {isError ? (
+          <Alert variant="danger">Error</Alert>
+        ) : isLoading ? (
+          <Spinner animation="border" />
+        ) : (
+          <Col xs={10} className="mx-auto mb-5">
+            {jobs.map((jobData) => (
+              <Job key={jobData._id} data={jobData} />
+            ))}
+          </Col>
+        )}
       </Row>
     </Container>
   );
